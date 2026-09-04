@@ -1,24 +1,51 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Hero } from "@/components/webrix/hero";
+import {
+  AuditSection,
+  CaseStudySection,
+  FaqSection,
+  FinalCta,
+  IntroSection,
+  PricingSection,
+  ProcessSection,
+  ServicesSection,
+  WhySection,
+  WorkSection,
+} from "@/components/webrix/sections";
+import { PROJECTS } from "@/lib/site";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Webrix — Build. Design. Grow.";
+const description =
+  "Webrix creates modern websites, landing pages and digital experiences for businesses, brands and creators.";
+
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Hero />
+      <IntroSection />
+      <ServicesSection />
+      <WorkSection limit={3} />
+      <CaseStudySection project={PROJECTS[0]!} />
+      <WhySection />
+      <ProcessSection />
+      <AuditSection />
+      <PricingSection />
+      <FaqSection />
+      <FinalCta />
+    </>
   );
 }
