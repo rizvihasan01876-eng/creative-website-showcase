@@ -14,7 +14,7 @@
 - [x] Floating WhatsApp button
 - [x] Free website audit lead-gen block
 - [x] Hero urgency line ("2 slots open this month")
-- [ ] Preloader (WEBRIX fade-in)
+- [x] Preloader (WEBRIX fade-in)
 - [x] 404 page + privacy/terms pages
 
 ## Later (deferred, noted by user)
