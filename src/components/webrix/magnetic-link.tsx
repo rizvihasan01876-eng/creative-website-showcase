@@ -48,6 +48,7 @@ export function MagneticLink({
   to,
   href,
   hash,
+  params,
   children,
   variant = "solid",
   className,
