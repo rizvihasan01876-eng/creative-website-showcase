@@ -81,6 +81,7 @@ export function MagneticLink({
       ref={ref as React.Ref<HTMLAnchorElement>}
       to={to ?? "/"}
       {...(hash ? { hash } : {})}
+      {...(params ? { params } : {})}
       className={classes}
       style={style}
       onMouseMove={onMove}
