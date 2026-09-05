@@ -37,6 +37,7 @@ type Props = {
   to?: string;
   href?: string;
   hash?: string;
+  params?: Record<string, string>;
   children: ReactNode;
   variant?: Variant;
   className?: string;
