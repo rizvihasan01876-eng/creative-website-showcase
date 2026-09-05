@@ -37,6 +37,7 @@ type Props = {
   to?: string;
   href?: string;
   hash?: string;
+  params?: Record<string, string>;
   children: ReactNode;
   variant?: Variant;
   className?: string;
@@ -47,6 +48,7 @@ export function MagneticLink({
   to,
   href,
   hash,
+  params,
   children,
   variant = "solid",
   className,
@@ -79,6 +81,7 @@ export function MagneticLink({
       ref={ref as React.Ref<HTMLAnchorElement>}
       to={to ?? "/"}
       {...(hash ? { hash } : {})}
+      {...(params ? { params } : {})}
       className={classes}
       style={style}
       onMouseMove={onMove}

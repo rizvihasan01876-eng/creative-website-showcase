@@ -1,0 +1,92 @@
+import { useEffect, useState } from "react";
+import { BRAND } from "@/lib/site";
+
+const LETTER_STAGGER = 60;
+const REVEAL_DURATION = 900;
+const HOLD_DURATION = 700;
+
+// Only play the preloader once per full browser session / app load.
+let playedOnce = false;
+
+export function Preloader() {
+  const [shouldPlay, setShouldPlay] = useState(false);
+  const [lettersRevealed, setLettersRevealed] = useState(false);
+  const [exited, setExited] = useState(false);
+
+  useEffect(() => {
+    if (playedOnce) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    playedOnce = true;
+
+    if (prefersReducedMotion) {
+      setExited(true);
+      return;
+    }
+
+    setShouldPlay(true);
+
+    const revealTimer = window.setTimeout(() => {
+      setLettersRevealed(true);
+    }, 100);
+
+    const exitTimer = window.setTimeout(() => {
+      setExited(true);
+    }, REVEAL_DURATION + HOLD_DURATION);
+
+    return () => {
+      window.clearTimeout(revealTimer);
+      window.clearTimeout(exitTimer);
+    };
+  }, []);
+
+  if (!shouldPlay || exited) return null;
+
+  const letters = BRAND.name.split("");
+
+  return (
+    <div
+      aria-hidden="true"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-background transition-[transform,opacity] duration-700 opacity-100"
+      style={{
+        transitionTimingFunction: "var(--ease-out-quint)",
+        transform: lettersRevealed ? "translateY(-100%)" : "translateY(0)",
+        transitionDelay: lettersRevealed ? `${HOLD_DURATION}ms` : "0ms",
+      }}
+    >
+      <div className="flex overflow-hidden">
+        {letters.map((letter, i) => (
+          <span
+            key={i}
+            className="display text-[clamp(3rem,12vw,8rem)] text-ink"
+            style={{
+              transform: lettersRevealed ? "translateY(0)" : "translateY(100%)",
+              opacity: lettersRevealed ? 1 : 0,
+              transition:
+                "transform 0.7s var(--ease-out-quint), opacity 0.7s var(--ease-out-quint)",
+              transitionDelay: lettersRevealed
+                ? `${i * LETTER_STAGGER}ms`
+                : "0ms",
+            }}
+          >
+            {letter}
+          </span>
+        ))}
+      </div>
+
+      <div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        style={{
+          opacity: lettersRevealed ? 1 : 0,
+          transition: "opacity 0.5s ease",
+          transitionDelay: lettersRevealed ? `${letters.length * LETTER_STAGGER}ms` : "0ms",
+        }}
+      >
+        <span className="eyebrow text-ink-faint">{BRAND.tagline}</span>
+      </div>
+    </div>
+  );
+}

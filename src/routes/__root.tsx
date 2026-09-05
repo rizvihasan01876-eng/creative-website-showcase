@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "@/components/webrix/nav";
 import { SiteFooter } from "@/components/webrix/footer";
 import { WhatsAppFloat } from "@/components/webrix/whatsapp-float";
+import { Preloader } from "@/components/webrix/preloader";
 
 function NotFoundComponent() {
   return (
@@ -134,6 +135,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <Preloader />
       <SiteNav />
       <main id="main">
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}

@@ -199,6 +199,9 @@ export function ProjectBlock({ project, index }: { project: Project; index: numb
           <MagneticLink href={project.url} variant="outline">
             View Live Site ↗
           </MagneticLink>
+          <MagneticLink to="/work/$slug" params={{ slug: project.slug }} variant="outline">
+            Read Case Study
+          </MagneticLink>
         </Reveal>
       </div>
     </article>
