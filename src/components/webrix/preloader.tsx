@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { BRAND } from "@/lib/site";
-import { cn } from "@/lib/utils";
 
 const LETTER_STAGGER = 60;
 const REVEAL_DURATION = 900;
