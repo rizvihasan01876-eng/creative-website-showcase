@@ -6,22 +6,29 @@ const LETTER_STAGGER = 60;
 const REVEAL_DURATION = 900;
 const HOLD_DURATION = 700;
 
+// Only play the preloader once per full browser session / app load.
+let playedOnce = false;
+
 export function Preloader() {
-  const [mounted, setMounted] = useState(false);
+  const [shouldPlay, setShouldPlay] = useState(false);
   const [lettersRevealed, setLettersRevealed] = useState(false);
   const [exited, setExited] = useState(false);
 
   useEffect(() => {
+    if (playedOnce) return;
+
     const prefersReducedMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
+
+    playedOnce = true;
 
     if (prefersReducedMotion) {
       setExited(true);
       return;
     }
 
-    setMounted(true);
+    setShouldPlay(true);
 
     const revealTimer = window.setTimeout(() => {
       setLettersRevealed(true);
@@ -37,17 +44,14 @@ export function Preloader() {
     };
   }, []);
 
-  if (exited) return null;
+  if (!shouldPlay || exited) return null;
 
   const letters = BRAND.name.split("");
 
   return (
     <div
       aria-hidden="true"
-      className={cn(
-        "fixed inset-0 z-[100] flex items-center justify-center bg-background transition-[transform,opacity] duration-700",
-        mounted ? "opacity-100" : "opacity-0"
-      )}
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-background transition-[transform,opacity] duration-700 opacity-100"
       style={{
         transitionTimingFunction: "var(--ease-out-quint)",
         transform: lettersRevealed ? "translateY(-100%)" : "translateY(0)",
