@@ -18,11 +18,6 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with Webrix on WhatsApp"
-      onClick={(e) => {
-        e.preventDefault();
-        const w = window.open(BRAND.whatsappUrl, "_blank", "noopener,noreferrer");
-        if (!w) window.top!.location.href = BRAND.whatsappUrl;
-      }}
       className={cn(
         "group fixed right-4 bottom-4 z-40 flex items-center gap-3 rounded-full bg-whatsapp py-3 pr-5 pl-3 text-background shadow-[var(--shadow-lift)] transition-all duration-600 md:right-8 md:bottom-8",
         visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-6 opacity-0",
