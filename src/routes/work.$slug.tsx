@@ -1,4 +1,4 @@
-import { createFileRoute, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { Container, SectionHead, FinalCta } from "@/components/webrix/sections";
 import { MagneticLink } from "@/components/webrix/magnetic-link";
 import { Reveal } from "@/components/webrix/reveal";
