@@ -14,6 +14,7 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteNav } from "@/components/webrix/nav";
 import { SiteFooter } from "@/components/webrix/footer";
 import { WhatsAppFloat } from "@/components/webrix/whatsapp-float";
+import { Preloader } from "@/components/webrix/preloader";
 
 function NotFoundComponent() {
   return (
