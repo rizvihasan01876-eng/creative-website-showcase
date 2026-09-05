@@ -23,4 +23,4 @@
 - [ ] Video testimonials (when real ones exist)
 - [ ] Blog / Insights section
 - [ ] Bangla / English language toggle
-- [ ] Separate case study pages per project
+- [x] Separate case study pages per project
